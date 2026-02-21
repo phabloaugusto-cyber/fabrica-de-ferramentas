@@ -273,3 +273,6 @@ app.get("/sobre", (req, res) => {
 // Start
 const port = Number(process.env.PORT || 3000);
 app.listen(port, () => console.log(`[OK] ${SITE_NAME} rodando na porta ${port}`));
+app.get("/ferramentas", (req, res) => {
+  res.render("ferramentas", { SITE_NAME, title: "Ferramentas" });
+});
