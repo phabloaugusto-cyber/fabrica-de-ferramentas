@@ -1,0 +1,69 @@
+<%
+function val(name, d=""){ return (form && form[name]) ? form[name] : d; }
+
+let docHtml = "";
+if (doc){
+  docHtml = `
+  <div class="card">
+    <h2>Contrato (pronto)</h2>
+    <p class="small">Use <strong>Ctrl+P</strong> para imprimir ou salvar em PDF.</p>
+    <div class="print"><button onclick="window.print()">Imprimir / Salvar PDF</button></div>
+    <hr/>
+    <h3>CONTRATO PARTICULAR DE EMPRÉSTIMO</h3>
+    <p>Pelo presente instrumento particular, de um lado, <strong>${doc.credor_nome || "________________"}</strong>, CPF <strong>${doc.credor_cpf || "___________"}</strong>, doravante denominado <strong>CREDOR</strong>; e de outro lado, <strong>${doc.devedor_nome || "________________"}</strong>, CPF <strong>${doc.devedor_cpf || "___________"}</strong>, doravante denominado <strong>DEVEDOR</strong>, têm entre si justo e contratado o que segue:</p>
+
+    <p><strong>1. Valor.</strong> O CREDOR empresta ao DEVEDOR a quantia de <strong>${doc.valor}</strong>.</p>
+    <p><strong>2. Juros.</strong> O valor será acrescido de juros de <strong>${doc.juros_mes}</strong>.</p>
+    <p><strong>3. Vencimento.</strong> O pagamento ocorrerá até <strong>${doc.vencimento || "____/____/____"}</strong>.</p>
+    <p><strong>4. Inadimplemento.</strong> Em caso de atraso, poderão incidir multa e juros de mora conforme combinado entre as partes.</p>
+    <p><strong>5. Foro.</strong> Fica eleito o foro da comarca de <strong>${doc.cidade || "____________"}</strong>.</p>
+
+    <p>${doc.cidade || "____________"}, <strong>${doc.data || "____/____/____"}</strong>.</p>
+
+    <p>_____________________________________<br/><strong>CREDOR</strong></p>
+    <p>_____________________________________<br/><strong>DEVEDOR</strong></p>
+  </div>`;
+} else {
+  docHtml = `<div class="card small">Preencha e clique em Gerar contrato.</div>`;
+}
+
+const body = `
+  <h1>Gerador de Contrato (Empréstimo)</h1>
+  <div class="grid">
+    <div class="card no-print">
+      <form method="POST" action="/contrato">
+        <label>Credor (nome)</label>
+        <input name="credor_nome" value="${val("credor_nome")}" placeholder="Nome completo"/>
+
+        <label>Credor (CPF)</label>
+        <input name="credor_cpf" value="${val("credor_cpf")}" placeholder="000.000.000-00"/>
+
+        <label>Devedor (nome)</label>
+        <input name="devedor_nome" value="${val("devedor_nome")}" placeholder="Nome completo"/>
+
+        <label>Devedor (CPF)</label>
+        <input name="devedor_cpf" value="${val("devedor_cpf")}" placeholder="000.000.000-00"/>
+
+        <label>Valor (R$)</label>
+        <input name="valor" value="${val("valor","10000")}" placeholder="Ex: 10000"/>
+
+        <label>Juros ao mês (%)</label>
+        <input name="juros_mes" value="${val("juros_mes","5")}" placeholder="Ex: 5"/>
+
+        <label>Vencimento (dd/mm/aaaa)</label>
+        <input name="vencimento" value="${val("vencimento")}" placeholder="13/03/2026"/>
+
+        <label>Cidade/UF</label>
+        <input name="cidade" value="${val("cidade","Goiás/GO")}" placeholder="Cidade/UF"/>
+
+        <label>Data (dd/mm/aaaa)</label>
+        <input name="data" value="${val("data")}" placeholder="21/02/2026"/>
+
+        <button type="submit">Gerar contrato</button>
+      </form>
+    </div>
+    <div>${docHtml}</div>
+  </div>
+`;
+%>
+<%- include("_layout", { SITE_NAME, title: "Contrato • " + SITE_NAME, body }) %>

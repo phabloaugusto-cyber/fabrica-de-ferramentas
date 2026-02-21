@@ -1,0 +1,51 @@
+<%
+function val(name, d=""){ return (form && form[name]) ? form[name] : d; }
+
+let docHtml = "";
+if (doc){
+  docHtml = `
+  <div class="card">
+    <h2>Recibo (pronto)</h2>
+    <p class="small">Use <strong>Ctrl+P</strong> para imprimir ou salvar em PDF.</p>
+    <div class="print"><button onclick="window.print()">Imprimir / Salvar PDF</button></div>
+    <hr/>
+    <h3>RECIBO</h3>
+    <p>Eu, <strong>${doc.recebedor || "________________"}</strong>, declaro ter recebido de <strong>${doc.pagador || "________________"}</strong> a quantia de <strong>${doc.valor}</strong>, referente a <strong>${doc.referencia || "________________"}</strong>.</p>
+    <p>${doc.cidade || "____________"}, <strong>${doc.data || "____/____/____"}</strong>.</p>
+    <p>_____________________________________<br/><strong>Assinatura do Recebedor</strong></p>
+  </div>`;
+} else {
+  docHtml = `<div class="card small">Preencha e clique em Gerar recibo.</div>`;
+}
+
+const body = `
+  <h1>Gerador de Recibo</h1>
+  <div class="grid">
+    <div class="card no-print">
+      <form method="POST" action="/recibo">
+        <label>Pagador</label>
+        <input name="pagador" value="${val("pagador")}" placeholder="Nome do pagador"/>
+
+        <label>Recebedor</label>
+        <input name="recebedor" value="${val("recebedor")}" placeholder="Nome do recebedor"/>
+
+        <label>Valor (R$)</label>
+        <input name="valor" value="${val("valor","500")}" placeholder="Ex: 500"/>
+
+        <label>Referência</label>
+        <input name="referencia" value="${val("referencia","Serviços")}" placeholder="Ex: Pagamento de serviços"/>
+
+        <label>Cidade/UF</label>
+        <input name="cidade" value="${val("cidade","Goiás/GO")}" placeholder="Cidade/UF"/>
+
+        <label>Data (dd/mm/aaaa)</label>
+        <input name="data" value="${val("data")}" placeholder="21/02/2026"/>
+
+        <button type="submit">Gerar recibo</button>
+      </form>
+    </div>
+    <div>${docHtml}</div>
+  </div>
+`;
+%>
+<%- include("_layout", { SITE_NAME, title: "Recibo • " + SITE_NAME, body }) %>

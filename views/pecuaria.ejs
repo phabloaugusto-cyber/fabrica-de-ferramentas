@@ -1,0 +1,56 @@
+<%
+function val(name, d=""){ return (form && form[name]) ? form[name] : d; }
+
+let out = "";
+if (result){
+  const br = (n)=> n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+  const f = (n)=> (isFinite(n)? n.toFixed(2).replace(".", ","):"—");
+  out = `
+  <div class="card">
+    <div class="small">Resultado</div>
+    <div class="kpi">${br(result.totalLucro)}</div>
+    <div class="small">Lucro total do lote</div>
+    <hr/>
+    <div><strong>Qtd:</strong> ${result.qtd}</div>
+    <div><strong>Lucro por cabeça:</strong> ${br(result.lucroCab)}</div>
+    <div><strong>Custo total:</strong> ${br(result.totalCusto)}</div>
+    <div><strong>Receita total:</strong> ${br(result.totalReceita)}</div>
+    <hr/>
+    <div class="small">Arrobas entrada: ${f(result.arrobasEntrada)} • Arrobas saída: ${f(result.arrobasSaida)}</div>
+  </div>`;
+} else {
+  out = `<div class="card small">Preencha e clique em Calcular.</div>`;
+}
+
+const body = `
+  <h1>Calculadora Pecuária</h1>
+  <div class="grid">
+    <div class="card">
+      <form method="POST" action="/pecuaria">
+        <label>Quantidade de animais</label>
+        <input name="quantidade" value="${val("quantidade","10")}" placeholder="Ex: 10"/>
+
+        <label>Peso médio na entrada (kg)</label>
+        <input name="peso_entrada" value="${val("peso_entrada","180")}" placeholder="Ex: 180"/>
+
+        <label>Peso médio na saída (kg)</label>
+        <input name="peso_saida" value="${val("peso_saida","250")}" placeholder="Ex: 250"/>
+
+        <label>Preço da arroba na compra (R$)</label>
+        <input name="preco_arroba_compra" value="${val("preco_arroba_compra","250")}" placeholder="Ex: 250"/>
+
+        <label>Preço da arroba na venda (R$)</label>
+        <input name="preco_arroba_venda" value="${val("preco_arroba_venda","280")}" placeholder="Ex: 280"/>
+
+        <label>Custo extra por cabeça (R$)</label>
+        <input name="custo_por_cabeca" value="${val("custo_por_cabeca","0")}" placeholder="Ex: 120"/>
+
+        <button type="submit">Calcular</button>
+        <div class="small">Assume 1 arroba = 15 kg.</div>
+      </form>
+    </div>
+    <div>${out}</div>
+  </div>
+`;
+%>
+<%- include("_layout", { SITE_NAME, title: "Pecuária • " + SITE_NAME, body }) %>

@@ -1,0 +1,46 @@
+<%
+function val(name, d=""){ return (form && form[name]) ? form[name] : d; }
+let out = "";
+if (result){
+  const br = (n)=> n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+  out = `
+  <div class="card">
+    <div class="small">Resultado</div>
+    <div class="kpi">${br(result.montante)}</div>
+    <div class="small">Montante (com multa + juros)</div>
+    <hr/>
+    <div><strong>Principal:</strong> ${br(result.principal)}</div>
+    <div><strong>Com multa:</strong> ${br(result.comMulta)}</div>
+    <div><strong>Meses:</strong> ${result.meses}</div>
+    <div><strong>Juros total:</strong> ${br(result.jurosTotal)}</div>
+  </div>`;
+} else {
+  out = `<div class="card small">Preencha e clique em Calcular.</div>`;
+}
+
+const body = `
+  <h1>Calculadora de Juros</h1>
+  <div class="grid">
+    <div class="card">
+      <form method="POST" action="/juros">
+        <label>Valor principal (R$)</label>
+        <input name="principal" value="${val("principal")}" placeholder="Ex: 10000"/>
+
+        <label>Multa (%)</label>
+        <input name="multa" value="${val("multa","2")}" placeholder="Ex: 2"/>
+
+        <label>Juros ao mês (%)</label>
+        <input name="juros_mes" value="${val("juros_mes","1")}" placeholder="Ex: 1"/>
+
+        <label>Número de meses</label>
+        <input name="meses" value="${val("meses","12")}" placeholder="Ex: 12"/>
+
+        <button type="submit">Calcular</button>
+        <div class="small">Modelo: multa aplicada 1x + juros compostos mensal.</div>
+      </form>
+    </div>
+    <div>${out}</div>
+  </div>
+`;
+%>
+<%- include("_layout", { SITE_NAME, title: "Juros • " + SITE_NAME, body }) %>

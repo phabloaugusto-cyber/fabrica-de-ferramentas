@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+  <header class="no-print">
+    <div><strong><%= SITE_NAME %></strong> <span class="small">• ferramentas automáticas</span></div>
+    <div class="nav" style="margin-top:10px">
+      <a href="/">Início</a>
+      <a href="/juros">Juros</a>
+      <a href="/pecuaria">Pecuária</a>
+      <a href="/contrato">Contrato</a>
+      <a href="/recibo">Recibo</a>
+    </div>
+  </header>
+  <main>
+    <%- body %>
+    <hr class="no-print"/>
+    <div class="small no-print">Dica: você pode imprimir/Salvar em PDF usando Ctrl+P.</div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<%
+const body = `
+  <h1>Ferramentas</h1>
+  <p>Escolha uma ferramenta (todas funcionam sem login e sem banco).</p>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Calculadora de Juros</h2>
+      <p class="small">Multa + juros mensal (composto). Simulação rápida.</p>
+      <a href="/juros">Abrir →</a>
+    </div>
+
+    <div class="card">
+      <h2>Calculadora Pecuária</h2>
+      <p class="small">Lucro por cabeça e por lote (compra/venda por arroba).</p>
+      <a href="/pecuaria">Abrir →</a>
+    </div>
+
+    <div class="card">
+      <h2>Gerador de Contrato</h2>
+      <p class="small">Contrato simples de empréstimo (texto pronto para PDF).</p>
+      <a href="/contrato">Abrir →</a>
+    </div>
+
+    <div class="card">
+      <h2>Gerador de Recibo</h2>
+      <p class="small">Recibo simples (pronto para imprimir).</p>
+      <a href="/recibo">Abrir →</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Monetização (quando quiser)</h3>
+    <ul>
+      <li>Captura de leads (WhatsApp/Email) para vender serviços.</li>
+      <li>PDF “premium” com marca d'água removida (cobrança).</li>
+      <li>Anúncios quando tiver tráfego.</li>
+    </ul>
+  </div>
+`;
+%>
+<%- include("_layout", { SITE_NAME, title: SITE_NAME, body }) %>
