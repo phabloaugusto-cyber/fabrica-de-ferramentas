@@ -1,32 +1,65 @@
 <%
 const body = `
-<h1>Ferramentas</h1>
+<h1>Portal Inteligência Rural</h1>
 
 <p>
-A <strong>${SITE_NAME}</strong> reúne ferramentas online para cálculos financeiros, pecuários e geração de documentos.
-Use gratuitamente para simular juros, financiamento, salário líquido, lucro na pecuária e gerar contrato/recibo em PDF.
+O <strong>Portal Inteligência Rural</strong> é uma plataforma gratuita que oferece ferramentas práticas para produtores rurais, contadores, advogados e profissionais do agronegócio.
+</p>
+
+<p>
+Aqui você pode calcular juros, simular financiamentos, analisar lucro na pecuária, calcular salário líquido e gerar documentos como contratos e recibos em PDF.
 </p>
 
 <div class="card">
-<h2>Para quem é este site</h2>
-<p class="small">
-Produtores rurais, contadores, advogados, empresários e qualquer pessoa que precise de cálculos rápidos e confiáveis.
-Os resultados são estimativas e devem ser conferidos antes de uso oficial.
-</p>
+<h2>Ferramentas disponíveis</h2>
+
+<ul>
+<li><a href="/pecuaria-plus">Calculadora de lucro na pecuária</a></li>
+<li><a href="/financiamento">Simulador de financiamento</a></li>
+<li><a href="/juros">Calculadora de juros</a></li>
+<li><a href="/salario">Calculadora de salário líquido</a></li>
+<li><a href="/contrato">Gerador de contrato</a></li>
+<li><a href="/recibo">Gerador de recibo</a></li>
+</ul>
+
 </div>
 
 <div class="card">
-<h2>Atalhos rápidos</h2>
-<p class="small">
-<a href="/pecuaria-plus">Pecuária+</a> •
-<a href="/financiamento">Financiamento</a> •
-<a href="/juros">Juros</a> •
-<a href="/salario">Salário</a> •
-<a href="/contrato">Contrato</a> •
-<a href="/recibo">Recibo</a>
+<h2>Objetivo do portal</h2>
+
+<p>
+Nosso objetivo é fornecer ferramentas confiáveis, simples e acessíveis para auxiliar na tomada de decisão financeira, especialmente no agronegócio.
 </p>
+
+<p>
+Todas as ferramentas são gratuitas e podem ser utilizadas diretamente no navegador, sem necessidade de instalação.
+</p>
+
+</div>
+
+<div class="card">
+<h2>Quem pode utilizar</h2>
+
+<ul>
+<li>Produtores rurais</li>
+<li>Contadores</li>
+<li>Advogados</li>
+<li>Empresários</li>
+<li>Estudantes</li>
+<li>Qualquer pessoa que precise de cálculos financeiros</li>
+</ul>
+
+</div>
+
+<div class="card">
+<h2>Contato</h2>
+
+<p>
+Para dúvidas ou sugestões, acesse a página <a href="/contato">Contato</a>.
+</p>
+
 </div>
 `;
 %>
 
-<%- include("_layout", { title: "Início", body: body }) %>
+<%- include("_layout", { body }) %>
