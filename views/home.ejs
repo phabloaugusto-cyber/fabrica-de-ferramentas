@@ -1,7 +1,30 @@
 <%
 const body = `
   <h1>Ferramentas</h1>
-  <p>Escolha uma ferramenta (todas funcionam sem login e sem banco).</p>
+  <p>
+A <strong><%= SITE_NAME %></strong> reúne ferramentas online para cálculos financeiros, pecuários e geração de documentos.
+Use gratuitamente para simular juros, financiamento, salário líquido, lucro na pecuária e gerar contrato/recibo em PDF.
+</p>
+
+<div class="card">
+  <h2>Para quem é este site?</h2>
+  <p class="small">
+    Produtores rurais, contadores, advogados, empresários e qualquer pessoa que precise de cálculos rápidos e confiáveis.
+    Os resultados são estimativas e devem ser conferidos antes de uso oficial.
+  </p>
+</div>
+
+<div class="card">
+  <h2>Atalhos rápidos</h2>
+  <p class="small">
+    <a href="/pecuaria-plus">Pecuária+</a> •
+    <a href="/financiamento">Financiamento</a> •
+    <a href="/juros">Juros</a> •
+    <a href="/salario">Salário</a> •
+    <a href="/contrato">Contrato</a> •
+    <a href="/recibo">Recibo</a>
+  </p>
+</div>
 
   <div class="grid">
     <div class="card">
