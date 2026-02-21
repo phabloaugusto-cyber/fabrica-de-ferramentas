@@ -264,3 +264,6 @@ app.get('/termos', (req, res) => {
 app.get('/contato', (req, res) => {
   res.render('contato', { title: 'Contato' });
 });
+app.get("/sobre", (req, res) => {
+  res.render("sobre", { title: "Sobre" });
+});
