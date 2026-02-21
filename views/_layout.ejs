@@ -1,141 +1,57 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title><%= title || SITE_NAME %></title>
-
-  <!-- Google Search Console -->
+  <!-- Google Search Console (mantenha este token) -->
   <meta name="google-site-verification" content="g9mqeLvGGD1YpVxnAAN49SNyyHELHrqtVDZZh6ppwkU" />
 
-  <!-- Google AdSense (IMPORTANTE) -->
-  <script async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6428482687850030"
-    crossorigin="anonymous"></script>
-
-  <link rel="stylesheet" href="/style.css"/>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f4f6f8;
-      color: #222;
-    }
-
-    header {
-      background: white;
-      border-bottom: 1px solid #ddd;
-      padding: 15px 20px;
-    }
-
-    .logo {
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .small {
-      color: #666;
-      font-size: 13px;
-    }
-
-    .nav {
-      margin-top: 8px;
-    }
-
-    .nav a {
-      margin-right: 15px;
-      text-decoration: none;
-      color: #0366d6;
-      font-weight: 500;
-    }
-
-    .nav a:hover {
-      text-decoration: underline;
-    }
-
-    main {
-      max-width: 900px;
-      margin: 30px auto;
-      background: white;
-      padding: 25px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    }
-
-    footer {
-      margin-top: 40px;
-      padding: 20px;
-      background: white;
-      border-top: 1px solid #ddd;
-      text-align: center;
-      font-size: 14px;
-      color: #555;
-    }
-
-    footer a {
-      color: #0366d6;
-      text-decoration: none;
-      margin: 0 8px;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-  </style>
+  <title><%= title || SITE_NAME %></title>
+  <link rel="stylesheet" href="/style.css" />
 </head>
 
 <body>
+  <header class="no-print">
+    <div>
+      <strong><%= SITE_NAME %></strong>
+      <span class="small">• ferramentas automáticas</span>
+    </div>
 
-<header>
+    <nav class="nav" style="margin-top:10px">
+      <a href="/">Início</a>
+      <a href="/juros">Juros</a>
+      <a href="/pecuaria">Pecuária</a>
+      <a href="/contrato">Contrato</a>
+      <a href="/recibo">Recibo</a>
+      <a href="/financiamento">Financiamento</a>
+      <a href="/salario">Salário</a>
+      <a href="/pecuaria-plus">Pecuária+</a>
+      <a href="/sobre">Sobre</a>
+      <a href="/contato">Contato</a>
+    </nav>
+    <hr />
+  </header>
 
-  <div class="logo">
-    <%= SITE_NAME %>
-    <span class="small">• ferramentas automáticas</span>
-  </div>
+  <main>
+    <%- body %>
+  </main>
 
-  <div class="nav">
-    <a href="/">Início</a>
-    <a href="/juros">Juros</a>
-    <a href="/pecuaria">Pecuária</a>
-    <a href="/contrato">Contrato</a>
-    <a href="/recibo">Recibo</a>
-    <a href="/financiamento">Financiamento</a>
-    <a href="/salario">Salário</a>
-    <a href="/pecuaria-plus">Pecuária+</a>
-    <a href="/sobre">Sobre</a>
-  </div>
+  <footer class="no-print" style="margin-top:24px">
+    <hr />
+    <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;">
+      <div>
+        <a href="/privacidade">Política de Privacidade</a>
+        <span> | </span>
+        <a href="/termos">Termos de Uso</a>
+        <span> | </span>
+        <a href="/contato">Contato</a>
+      </div>
 
-</header>
+      <div class="small">© <%= new Date().getFullYear() %> <%= SITE_NAME %></div>
+    </div>
+  </footer>
 
-
-<main>
-
-  <%- body %>
-
-</main>
-
-
-<footer>
-
-  <div>
-    <a href="/privacidade">Política de Privacidade</a> |
-    <a href="/termos">Termos de Uso</a> |
-    <a href="/sobre">Sobre</a>
-  </div>
-
-  <div style="margin-top:10px;">
-    Contato: phabloaugusto@email.com
-  </div>
-
-  <div style="margin-top:10px;">
-    © 2026 <%= SITE_NAME %>
-  </div>
-
-</footer>
-
-
+  <!-- Depois que o AdSense aprovar, você cola aqui o script que ele fornecer (Auto Ads) -->
 </body>
 </html>
