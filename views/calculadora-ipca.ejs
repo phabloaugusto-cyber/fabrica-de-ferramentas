@@ -1,0 +1,57 @@
+<%
+const title = "Calculadora IPCA";
+const description = "Simule correção por IPCA (estimativa) com taxa anual ou percentual no período.";
+
+const body = `
+<h1>Calculadora IPCA</h1>
+
+<div class="card">
+  <p class="small">
+    Simulação de correção monetária usando taxa aproximada.
+    Você pode informar taxa anual (% a.a.) e meses, ou % total no período.
+  </p>
+</div>
+
+<div class="card">
+  <form method="post" action="/calculadora-ipca">
+    <label>Valor base (R$)</label>
+    <input name="valor" inputmode="decimal" placeholder="Ex: 5000" required />
+
+    <label>Modo</label>
+    <select name="modo">
+      <option value="aa">Taxa anual (% a.a.) + meses</option>
+      <option value="periodo">% total no período</option>
+    </select>
+
+    <label>IPCA ao ano (% a.a.)</label>
+    <input name="ipca_aa" inputmode="decimal" placeholder="Ex: 4,50" />
+
+    <label>Meses</label>
+    <input name="meses" inputmode="numeric" placeholder="Ex: 12" />
+
+    <label>% total no período</label>
+    <input name="ipca_periodo" inputmode="decimal" placeholder="Ex: 3,20" />
+
+    <button type="submit">Calcular</button>
+  </form>
+</div>
+
+<% if (result) { %>
+  <div class="card">
+    <h2>Resultado</h2>
+    <p class="small"><strong>Valor corrigido:</strong> <%= result.valorCorrigidoFmt %></p>
+    <p class="small"><strong>Correção:</strong> <%= result.correcaoFmt %></p>
+    <p class="small"><strong>Fator:</strong> <%= result.fatorFmt %></p>
+  </div>
+<% } %>
+
+<div class="card">
+  <h2>Observação</h2>
+  <p class="small">
+    Se usar taxa anual, convertemos para taxa mensal aproximada por (1+aa)^(1/12)-1.
+    Para apuração oficial, use séries reais por período.
+  </p>
+</div>
+`;
+%>
+<%- include("_layout", { title, description, body }) %>
