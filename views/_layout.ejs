@@ -7,7 +7,7 @@
   <!-- Google Search Console (mantenha este token) -->
   <meta name="google-site-verification" content="g9mqeLvGGD1YpVxnAAN49SNyyHELHrqtVDZZh6ppwkU" />
 
-  <title><%= title || SITE_NAME %></title>
+  <title><%= typeof title !== 'undefined' ? title : SITE_NAME %></title>
   <link rel="stylesheet" href="/style.css" />
 </head>
 
