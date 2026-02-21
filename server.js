@@ -254,3 +254,10 @@ app.get("/health", (req, res) => res.json({ ok: true }));
 
 const port = Number(process.env.PORT || 3000);
 app.listen(port, () => console.log(`[OK] ${SITE_NAME} rodando na porta ${port}`));
+app.get('/privacidade', (req, res) => {
+  res.render('privacidade', { title: 'Política de Privacidade' });
+});
+
+app.get('/termos', (req, res) => {
+  res.render('termos', { title: 'Termos de Uso' });
+});
