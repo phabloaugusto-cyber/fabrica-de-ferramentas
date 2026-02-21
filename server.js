@@ -115,6 +115,141 @@ app.post("/recibo", (req, res) => {
   res.render("recibo", { SITE_NAME, doc, form: f });
 });
 
+
+// 5) Simulador de Financiamento (juros mensais)
+app.get("/financiamento", (req, res) => {
+  res.render("financiamento", { SITE_NAME, result: null, form: {} });
+});
+
+app.post("/financiamento", (req, res) => {
+  const form = req.body || {};
+  const valor = num(form.valor);
+  const entrada = num(form.entrada);
+  const meses = Math.max(1, Math.floor(num(form.meses) || 0));
+  const jurosMes = pctToDec(form.juros_mes);
+
+  let result = null;
+  if (isFinite(valor) && isFinite(entrada) && isFinite(jurosMes) && meses > 0) {
+    const principal = Math.max(0, valor - entrada);
+    // parcela fixa (Price): P * i*(1+i)^n / ((1+i)^n - 1)
+    const i = jurosMes;
+    let parcela = 0;
+    if (i === 0) {
+      parcela = principal / meses;
+    } else {
+      const pow = Math.pow(1 + i, meses);
+      parcela = principal * (i * pow) / (pow - 1);
+    }
+    const totalPago = parcela * meses + entrada;
+    const jurosTotal = totalPago - valor;
+
+    result = { valor, entrada, principal, meses, jurosMes, parcela, totalPago, jurosTotal };
+  }
+
+  res.render("financiamento", { SITE_NAME, result, form });
+});
+
+// 6) Calculadora de Salário Líquido (aproximação)
+app.get("/salario", (req, res) => {
+  res.render("salario", { SITE_NAME, result: null, form: {} });
+});
+
+app.post("/salario", (req, res) => {
+  const form = req.body || {};
+  const bruto = num(form.bruto);
+  const dependentes = Math.max(0, Math.floor(num(form.dependentes) || 0));
+
+  let result = null;
+  if (isFinite(bruto) && bruto >= 0) {
+    // INSS 2024/2025-like (aproximação por faixas progressivas) – bom p/ simulação
+    const faixas = [
+      { teto: 1412.00, aliq: 0.075 },
+      { teto: 2666.68, aliq: 0.09 },
+      { teto: 4000.03, aliq: 0.12 },
+      { teto: 7786.02, aliq: 0.14 },
+    ];
+    let base = bruto;
+    let inss = 0;
+    let prevTeto = 0;
+    for (const f of faixas) {
+      const faixaBase = Math.min(base, f.teto) - prevTeto;
+      if (faixaBase > 0) inss += faixaBase * f.aliq;
+      prevTeto = f.teto;
+    }
+    // Teto INSS (aprox). Mantemos o cálculo progressivo, que já limita.
+    const baseIr = Math.max(0, bruto - inss - dependentes * 189.59); // dedução por dependente (aprox)
+    // IRRF (aproximação mensal por faixas)
+    const irFaixas = [
+      { teto: 2259.20, aliq: 0, ded: 0 },
+      { teto: 2826.65, aliq: 0.075, ded: 169.44 },
+      { teto: 3751.05, aliq: 0.15, ded: 381.44 },
+      { teto: 4664.68, aliq: 0.225, ded: 662.77 },
+      { teto: Infinity, aliq: 0.275, ded: 896.00 },
+    ];
+    let ir = 0;
+    for (const f of irFaixas) {
+      if (baseIr <= f.teto) { ir = Math.max(0, baseIr * f.aliq - f.ded); break; }
+    }
+    const liquido = bruto - inss - ir;
+    result = { bruto, dependentes, inss, baseIr, ir, liquido };
+  }
+
+  res.render("salario", { SITE_NAME, result, form });
+});
+
+// 7) Pecuária (avançada)
+app.get("/pecuaria-plus", (req, res) => {
+  res.render("pecuaria_plus", { SITE_NAME, result: null, form: {} });
+});
+
+app.post("/pecuaria-plus", (req, res) => {
+  const form = req.body || {};
+  const qtd = Math.max(1, Math.floor(num(form.quantidade) || 0));
+  const pesoEntrada = num(form.peso_entrada); // kg
+  const pesoSaida = num(form.peso_saida);     // kg
+  const precoArrobaCompra = num(form.preco_arroba_compra);
+  const precoArrobaVenda = num(form.preco_arroba_venda);
+  const custoCabeca = num(form.custo_por_cabeca); // R$
+  const dias = Math.max(0, Math.floor(num(form.dias) || 0));
+  const custoDia = num(form.custo_por_dia); // R$ por cabeça/dia (ração, mineral, etc)
+  const arrobaKg = 15;
+
+  let result = null;
+  if ([qtd, pesoEntrada, pesoSaida, precoArrobaCompra, precoArrobaVenda].every(isFinite) && qtd > 0) {
+    const arrobasEntrada = pesoEntrada / arrobaKg;
+    const arrobasSaida = pesoSaida / arrobaKg;
+
+    const custoCompraCab = arrobasEntrada * precoArrobaCompra;
+    const custoVariavelCab = (isFinite(custoCabeca) ? custoCabeca : 0) + (isFinite(custoDia) ? custoDia * dias : 0);
+    const custoTotalCab = custoCompraCab + custoVariavelCab;
+
+    const receitaVendaCab = arrobasSaida * precoArrobaVenda;
+    const lucroCab = receitaVendaCab - custoTotalCab;
+
+    const ganhoKg = pesoSaida - pesoEntrada;
+    const ganhoArroba = ganhoKg / arrobaKg;
+
+    // preço de venda break-even (arroba) para empatar
+    const precoVendaEmpate = arrobasSaida > 0 ? (custoTotalCab / arrobasSaida) : NaN;
+
+    result = {
+      qtd, pesoEntrada, pesoSaida, precoArrobaCompra, precoArrobaVenda,
+      dias, custoDia: isFinite(custoDia) ? custoDia : 0,
+      custoCabeca: isFinite(custoCabeca) ? custoCabeca : 0,
+      arrobasEntrada, arrobasSaida, ganhoKg, ganhoArroba,
+      custoCompraCab, custoVariavelCab, custoTotalCab,
+      receitaVendaCab, lucroCab,
+      totalCusto: custoTotalCab * qtd,
+      totalReceita: receitaVendaCab * qtd,
+      totalLucro: lucroCab * qtd,
+      precoVendaEmpate
+    };
+  }
+
+  res.render("pecuaria_plus", { SITE_NAME, result, form });
+});
+
+
 app.get("/health", (req, res) => res.json({ ok: true }));
 
 const port = Number(process.env.PORT || 3000);

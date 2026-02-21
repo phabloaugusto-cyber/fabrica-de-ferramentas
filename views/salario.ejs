@@ -1,0 +1,40 @@
+<%
+function val(name, d=""){ return (form && form[name]) ? form[name] : d; }
+let out = "";
+if (result){
+  const br = (n)=> n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+  out = `
+  <div class="card">
+    <div class="small">Resultado</div>
+    <div class="kpi">${br(result.liquido)}</div>
+    <div class="small">Salário líquido (aprox.)</div>
+    <hr/>
+    <div><strong>Bruto:</strong> ${br(result.bruto)}</div>
+    <div><strong>INSS (aprox.):</strong> ${br(result.inss)}</div>
+    <div><strong>Base IR (aprox.):</strong> ${br(result.baseIr)}</div>
+    <div><strong>IRRF (aprox.):</strong> ${br(result.ir)}</div>
+  </div>`;
+} else {
+  out = `<div class="card small">Preencha e clique em Calcular.</div>`;
+}
+
+const body = `
+  <h1>Calculadora de Salário Líquido</h1>
+  <div class="grid">
+    <div class="card">
+      <form method="POST" action="/salario">
+        <label>Salário bruto (R$)</label>
+        <input name="bruto" value="${val("bruto","3000")}" placeholder="Ex: 3000"/>
+
+        <label>Nº de dependentes</label>
+        <input name="dependentes" value="${val("dependentes","0")}" placeholder="Ex: 0"/>
+
+        <button type="submit">Calcular</button>
+        <div class="small">INSS e IR são aproximações (boa para estimativa). Pode diferir da folha real.</div>
+      </form>
+    </div>
+    <div>${out}</div>
+  </div>
+`;
+%>
+<%- include("_layout", { SITE_NAME, title: "Salário • " + SITE_NAME, body }) %>

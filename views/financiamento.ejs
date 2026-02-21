@@ -1,0 +1,51 @@
+<%
+function val(name, d=""){ return (form && form[name]) ? form[name] : d; }
+let out = "";
+if (result){
+  const br = (n)=> n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+  const pct = (d)=> (d*100).toFixed(2).replace(".",",") + "%";
+  out = `
+  <div class="card">
+    <div class="small">Resultado</div>
+    <div class="kpi">${br(result.parcela)}</div>
+    <div class="small">Parcela mensal (aprox. Price)</div>
+    <hr/>
+    <div><strong>Valor do bem:</strong> ${br(result.valor)}</div>
+    <div><strong>Entrada:</strong> ${br(result.entrada)}</div>
+    <div><strong>Financiado:</strong> ${br(result.principal)}</div>
+    <div><strong>Prazo:</strong> ${result.meses} meses</div>
+    <div><strong>Juros/mês:</strong> ${pct(result.jurosMes)}</div>
+    <hr/>
+    <div><strong>Total pago (inclui entrada):</strong> ${br(result.totalPago)}</div>
+    <div><strong>Juros total (aprox.):</strong> ${br(result.jurosTotal)}</div>
+  </div>`;
+} else {
+  out = `<div class="card small">Preencha e clique em Calcular.</div>`;
+}
+
+const body = `
+  <h1>Simulador de Financiamento</h1>
+  <div class="grid">
+    <div class="card">
+      <form method="POST" action="/financiamento">
+        <label>Valor do bem (R$)</label>
+        <input name="valor" value="${val("valor","50000")}" placeholder="Ex: 50000"/>
+
+        <label>Entrada (R$)</label>
+        <input name="entrada" value="${val("entrada","5000")}" placeholder="Ex: 5000"/>
+
+        <label>Juros ao mês (%)</label>
+        <input name="juros_mes" value="${val("juros_mes","1.8")}" placeholder="Ex: 1,8"/>
+
+        <label>Prazo (meses)</label>
+        <input name="meses" value="${val("meses","48")}" placeholder="Ex: 48"/>
+
+        <button type="submit">Calcular</button>
+        <div class="small">Modelo Price (parcela fixa). Simulação aproximada.</div>
+      </form>
+    </div>
+    <div>${out}</div>
+  </div>
+`;
+%>
+<%- include("_layout", { SITE_NAME, title: "Financiamento • " + SITE_NAME, body }) %>
