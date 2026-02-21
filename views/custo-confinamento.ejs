@@ -1,0 +1,60 @@
+<%
+const title = "Custo de Confinamento";
+const description = "Simule custo total e custo por arroba produzida no confinamento (estimativa).";
+
+const body = `
+<h1>Custo de Confinamento</h1>
+
+<div class="card">
+  <p class="small">
+    Simulação rápida para estimar custo total por cabeça, custo do lote e custo por arroba produzida.
+  </p>
+</div>
+
+<div class="card">
+  <form method="post" action="/custo-confinamento">
+    <label>Quantidade de animais</label>
+    <input name="qtd" inputmode="numeric" placeholder="Ex: 50" required />
+
+    <label>Dias de confinamento</label>
+    <input name="dias" inputmode="numeric" placeholder="Ex: 90" required />
+
+    <label>Custo por dia por cabeça (R$)</label>
+    <input name="custo_dia" inputmode="decimal" placeholder="Ex: 18,50" required />
+
+    <label>Outros custos por cabeça (R$) (opcional)</label>
+    <input name="outros" inputmode="decimal" placeholder="Ex: 250" />
+
+    <label>Peso entrada (kg)</label>
+    <input name="peso_entrada" inputmode="decimal" placeholder="Ex: 350" required />
+
+    <label>Peso saída (kg)</label>
+    <input name="peso_saida" inputmode="decimal" placeholder="Ex: 520" required />
+
+    <label>Kg por arroba</label>
+    <input name="arroba_kg" inputmode="decimal" value="15" />
+
+    <button type="submit">Calcular</button>
+  </form>
+</div>
+
+<% if (result) { %>
+  <div class="card">
+    <h2>Resultado</h2>
+    <p class="small"><strong>Custo por cabeça:</strong> <%= result.custoCabecaFmt %></p>
+    <p class="small"><strong>Custo total do lote:</strong> <%= result.custoTotalFmt %></p>
+    <p class="small"><strong>Ganho (kg):</strong> <%= result.ganhoKgFmt %></p>
+    <p class="small"><strong>Ganho (arrobas):</strong> <%= result.ganhoArrobaFmt %></p>
+    <p class="small"><strong>Custo por arroba produzida:</strong> <%= result.custoPorArrobaFmt %></p>
+  </div>
+<% } %>
+
+<div class="card">
+  <h2>Observação</h2>
+  <p class="small">
+    Isto é uma estimativa. Para análise completa, inclua mortalidade, cocho, comissão, custo de capital e manejo.
+  </p>
+</div>
+`;
+%>
+<%- include("_layout", { title, description, body }) %>
