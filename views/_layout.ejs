@@ -1,78 +1,66 @@
-<%
-  const SITE = (typeof SITE_NAME !== "undefined" && SITE_NAME) ? SITE_NAME : "Fábrica de Ferramentas";
-  const pageTitle = (typeof title !== "undefined" && title) ? `${title} — ${SITE}` : SITE;
-  const pageDesc = (typeof description !== "undefined" && description) ? description : "Ferramentas online gratuitas para cálculos financeiros, pecuários e geração de documentos.";
-  const ADSENSE_CLIENT = (typeof adsenseClient !== "undefined" && adsenseClient) ? adsenseClient : (process.env.ADSENSE_CLIENT || "");
-%>
 <!doctype html>
 <html lang="pt-br">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="<%= pageDesc %>" />
 
-  <!-- Google Search Console (se você estiver usando) -->
+  <% 
+    const SITE = (typeof SITE_NAME !== "undefined" && SITE_NAME) ? SITE_NAME : "Fábrica de Ferramentas";
+    const PAGE_TITLE = (typeof title !== "undefined" && title) ? title : SITE;
+    const META_DESC = (typeof description !== "undefined" && description) ? description : "";
+  %>
+
+  <title><%= PAGE_TITLE %></title>
+
+  <% if (META_DESC) { %>
+    <meta name="description" content="<%= META_DESC %>" />
+  <% } %>
+
+  <!-- Google Search Console verification (se quiser deixar fixo no layout) -->
   <meta name="google-site-verification" content="g9mqeLvGGD1YpVxnAAN49SNyyHELHrqtVDZZh6ppwkU" />
 
-  <title><%= pageTitle %></title>
   <link rel="stylesheet" href="/style.css" />
-
-  <!-- AdSense (Auto Ads) — fica aqui 1 vez só -->
-  <% if (ADSENSE_CLIENT) { %>
-    <script async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=<%= ADSENSE_CLIENT %>"
-      crossorigin="anonymous"></script>
-  <% } %>
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="container topbar__inner">
-      <a class="brand" href="/">
-        <span class="brand__name"><%= SITE %></span>
-        <span class="brand__tag">ferramentas automáticas</span>
-      </a>
+  <header class="no-print">
+    <div class="topbar">
+      <div class="brand">
+        <strong><%= SITE %></strong>
+        <span class="small">• ferramentas automáticas</span>
+      </div>
 
-      <nav class="nav" aria-label="Menu principal">
-        <a href="/" class="<%= (active === 'home') ? 'active' : '' %>">Início</a>
-        <a href="/juros" class="<%= (active === 'juros') ? 'active' : '' %>">Juros</a>
-        <a href="/pecuaria" class="<%= (active === 'pecuaria') ? 'active' : '' %>">Pecuária</a>
-        <a href="/contrato" class="<%= (active === 'contrato') ? 'active' : '' %>">Contrato</a>
-        <a href="/recibo" class="<%= (active === 'recibo') ? 'active' : '' %>">Recibo</a>
-        <a href="/financiamento" class="<%= (active === 'financiamento') ? 'active' : '' %>">Financiamento</a>
-        <a href="/salario" class="<%= (active === 'salario') ? 'active' : '' %>">Salário</a>
-        <a href="/pecuaria-plus" class="<%= (active === 'pecuariaPlus') ? 'active' : '' %>">Pecuária+</a>
-        <a href="/sobre" class="<%= (active === 'sobre') ? 'active' : '' %>">Sobre</a>
-        <a href="/contato" class="<%= (active === 'contato') ? 'active' : '' %>">Contato</a>
+      <nav class="nav">
+        <a href="/">Início</a>
+        <a href="/juros">Juros</a>
+        <a href="/pecuaria">Pecuária</a>
+        <a href="/contrato">Contrato</a>
+        <a href="/recibo">Recibo</a>
+        <a href="/financiamento">Financiamento</a>
+        <a href="/salario">Salário</a>
+        <a href="/pecuaria-plus">Pecuária+</a>
+        <a href="/sobre">Sobre</a>
+        <a href="/contato">Contato</a>
       </nav>
     </div>
+    <hr />
   </header>
 
-  <main class="container">
-    <!-- Top ad placeholder (quando aprovado, Auto Ads pode preencher) -->
-    <div class="ad ad--top" aria-hidden="true"></div>
-
-    <section class="page">
-      <%- (typeof body !== "undefined" ? body : "") %>
-    </section>
-
-    <!-- Bottom ad placeholder -->
-    <div class="ad ad--bottom" aria-hidden="true"></div>
+  <main>
+    <%- body %>
   </main>
 
   <footer class="footer">
-    <div class="container footer__inner">
-      <div class="footer__links">
+    <hr />
+    <div class="footer-inner">
+      <div class="links">
         <a href="/privacidade">Política de Privacidade</a>
-        <span class="sep">•</span>
+        <span> | </span>
         <a href="/termos">Termos de Uso</a>
-        <span class="sep">•</span>
+        <span> | </span>
         <a href="/contato">Contato</a>
       </div>
-
-      <div class="footer__copy">
-        © <%= new Date().getFullYear() %> <%= SITE %>
-      </div>
+      <div class="small">© <%= new Date().getFullYear() %> <%= SITE %></div>
     </div>
   </footer>
 </body>
