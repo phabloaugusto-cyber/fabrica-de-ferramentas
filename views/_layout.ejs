@@ -1,59 +1,141 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-  <!-- Google Search Console (MANTER) -->
+  <title><%= title || SITE_NAME %></title>
+
+  <!-- Google Search Console -->
   <meta name="google-site-verification" content="g9mqeLvGGD1YpVxnAAN49SNyyHELHrqtVDZZh6ppwkU" />
 
-  <title><%= title || SITE_NAME || "Fábrica de Ferramentas" %></title>
-
-  <link rel="stylesheet" href="/style.css" />
-
-  <!-- (Opcional) Depois que o AdSense liberar, você pode colocar o script aqui -->
-  <!--
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=SEU_CLIENT_ID"
+  <!-- Google AdSense (IMPORTANTE) -->
+  <script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6428482687850030"
     crossorigin="anonymous"></script>
-  -->
+
+  <link rel="stylesheet" href="/style.css"/>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f6f8;
+      color: #222;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #ddd;
+      padding: 15px 20px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .small {
+      color: #666;
+      font-size: 13px;
+    }
+
+    .nav {
+      margin-top: 8px;
+    }
+
+    .nav a {
+      margin-right: 15px;
+      text-decoration: none;
+      color: #0366d6;
+      font-weight: 500;
+    }
+
+    .nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      background: white;
+      border-top: 1px solid #ddd;
+      text-align: center;
+      font-size: 14px;
+      color: #555;
+    }
+
+    footer a {
+      color: #0366d6;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+  </style>
 </head>
 
 <body>
-  <header class="no-print">
-    <div>
-      <strong><%= SITE_NAME %></strong>
-      <span class="small">• ferramentas automáticas</span>
-    </div>
 
-    <div class="nav" style="margin-top:10px">
-      <a href="/">Início</a>
-      <a href="/juros">Juros</a>
-      <a href="/pecuaria">Pecuária</a>
-      <a href="/contrato">Contrato</a>
-      <a href="/recibo">Recibo</a>
-      <a href="/financiamento">Financiamento</a>
-      <a href="/salario">Salário</a>
-      <a href="/pecuaria-plus">Pecuária+</a>
-<a href="/sobre">Sobre</a>
-    </div>
-  </header>
+<header>
 
-  <main>
-    <%- body %>
-  </main>
+  <div class="logo">
+    <%= SITE_NAME %>
+    <span class="small">• ferramentas automáticas</span>
+  </div>
 
-  <footer style="margin-top:40px;padding:20px;border-top:1px solid #ddd;font-size:14px;">
-    <a href="/privacidade">Política de Privacidade</a>
-    <span> | </span>
-    <a href="/termos">Termos de Uso</a>
-    <span style="float:right;opacity:.7;">
-      © <%= new Date().getFullYear() %> <%= SITE_NAME %>
-    </span>
-  </footer>
+  <div class="nav">
+    <a href="/">Início</a>
+    <a href="/juros">Juros</a>
+    <a href="/pecuaria">Pecuária</a>
+    <a href="/contrato">Contrato</a>
+    <a href="/recibo">Recibo</a>
+    <a href="/financiamento">Financiamento</a>
+    <a href="/salario">Salário</a>
+    <a href="/pecuaria-plus">Pecuária+</a>
+    <a href="/sobre">Sobre</a>
+  </div>
+
+</header>
+
+
+<main>
+
+  <%- body %>
+
+</main>
+
+
+<footer>
+
+  <div>
+    <a href="/privacidade">Política de Privacidade</a> |
+    <a href="/termos">Termos de Uso</a> |
+    <a href="/sobre">Sobre</a>
+  </div>
+
+  <div style="margin-top:10px;">
+    Contato: phabloaugusto@email.com
+  </div>
+
+  <div style="margin-top:10px;">
+    © 2026 <%= SITE_NAME %>
+  </div>
+
+</footer>
+
+
 </body>
 </html>
-<footer style="margin-top:40px;padding:20px;border-top:1px solid #ccc;">
-  <a href="/privacidade">Política de Privacidade</a> |
-  <a href="/termos">Termos de Uso</a> |
-  <a href="/contato">Contato</a>
-</footer>
