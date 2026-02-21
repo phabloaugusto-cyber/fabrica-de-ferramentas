@@ -1,0 +1,57 @@
+<%
+const title = "Ferramentas";
+const description = "Lista completa de ferramentas disponíveis no Portal Inteligência Rural.";
+const body = `
+<section class="card" style="padding:22px">
+  <h1>Ferramentas</h1>
+  <p class="small">
+    Acesse abaixo todas as ferramentas do portal. Use gratuitamente no navegador.
+  </p>
+</section>
+
+<div class="grid">
+  <div class="card">
+    <h2>Financeiro</h2>
+    <p class="small">
+      <a href="/juros">Calculadora de Juros</a><br/>
+      <a href="/financiamento">Simulador de Financiamento</a><br/>
+      <a href="/salario">Calculadora de Salário Líquido</a>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Pecuária</h2>
+    <p class="small">
+      <a href="/pecuaria">Pecuária (básica)</a><br/>
+      <a href="/pecuaria-plus">Pecuária+ (avançada)</a>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Documentos</h2>
+    <p class="small">
+      <a href="/contrato">Gerador de Contrato</a><br/>
+      <a href="/recibo">Gerador de Recibo</a>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Institucional</h2>
+    <p class="small">
+      <a href="/sobre">Sobre</a><br/>
+      <a href="/contato">Contato</a><br/>
+      <a href="/privacidade">Política de Privacidade</a><br/>
+      <a href="/termos">Termos de Uso</a>
+    </p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Observação</h2>
+  <p class="small">
+    Os resultados são estimativas e devem ser conferidos antes de qualquer uso oficial.
+  </p>
+</div>
+`;
+%>
+<%- include("_layout", { title, description, body, active: "ferramentas" }) %>
