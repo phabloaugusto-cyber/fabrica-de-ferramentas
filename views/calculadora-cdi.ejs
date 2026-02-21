@@ -1,0 +1,50 @@
+<%
+const title = "Calculadora CDI";
+const description = "Simule rendimento com base no CDI (estimativa).";
+
+const body = `
+<h1>Calculadora CDI</h1>
+
+<div class="card">
+  <p class="small">
+    Simulação simples de rendimento usando taxa anual e período em dias (aproximação).
+    Resultados são estimativas.
+  </p>
+</div>
+
+<div class="card">
+  <form method="post" action="/calculadora-cdi">
+    <label>Valor inicial (R$)</label>
+    <input name="valor" inputmode="decimal" placeholder="Ex: 1000" required />
+
+    <label>CDI ao ano (%)</label>
+    <input name="cdi_aa" inputmode="decimal" placeholder="Ex: 10,65" required />
+
+    <label>Percentual do CDI (%)</label>
+    <input name="pct_cdi" inputmode="decimal" placeholder="Ex: 100" value="100" required />
+
+    <label>Dias</label>
+    <input name="dias" inputmode="numeric" placeholder="Ex: 30" required />
+
+    <button type="submit">Calcular</button>
+  </form>
+</div>
+
+<% if (result) { %>
+  <div class="card">
+    <h2>Resultado</h2>
+    <p class="small"><strong>Valor final:</strong> <%= result.valorFinalFmt %></p>
+    <p class="small"><strong>Rendimento:</strong> <%= result.rendimentoFmt %></p>
+    <p class="small"><strong>Taxa diária aprox.:</strong> <%= result.taxaDiaFmt %></p>
+  </div>
+<% } %>
+
+<div class="card">
+  <h2>Observação</h2>
+  <p class="small">
+    Cálculo aproximado: converte taxa anual em diária por (1+aa)^(1/252)-1 e aplica por "dias".
+  </p>
+</div>
+`;
+%>
+<%- include("_layout", { title, description, body }) %>
