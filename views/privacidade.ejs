@@ -1,17 +1,46 @@
+<%
+const title = "Política de Privacidade";
+const description = "Política de privacidade da Fábrica de Ferramentas.";
+const body = `
 <h1>Política de Privacidade</h1>
 
-<p>Este site ("Fábrica de Ferramentas") respeita sua privacidade.</p>
+<div class="card">
+
+<p>
+Esta Política de Privacidade descreve como a <strong>Fábrica de Ferramentas</strong> coleta, usa e protege as informações dos usuários.
+</p>
 
 <h2>Coleta de informações</h2>
-<p>Não coletamos dados pessoais diretamente.</p>
-
-<h2>Google AdSense</h2>
-<p>Este site utiliza o Google AdSense, que pode usar cookies para exibir anúncios relevantes.</p>
+<p class="small">
+Não coletamos dados pessoais diretamente, exceto quando o usuário entra em contato voluntariamente por email.
+</p>
 
 <h2>Cookies</h2>
-<p>Cookies podem ser usados para melhorar a experiência do usuário e exibir anúncios personalizados.</p>
+<p class="small">
+Este site pode usar cookies para melhorar a experiência do usuário e exibir anúncios relevantes.
+</p>
+
+<h2>Google AdSense</h2>
+<p class="small">
+Utilizamos o Google AdSense para exibir anúncios. O Google pode usar cookies para personalizar anúncios com base nas visitas do usuário a este e outros sites.
+</p>
+
+<h2>Uso das informações</h2>
+<p class="small">
+As informações são usadas apenas para melhorar o funcionamento do site e responder contatos.
+</p>
 
 <h2>Contato</h2>
-<p>Email: phablo.augusto@gmail.com</p>
+<p class="small">
+Email: <a href="mailto:phablo.augusto@gmail.com">phablo.augusto@gmail.com</a>
+</p>
 
-<p>Esta política pode ser atualizada a qualquer momento.</p>
+<h2>Atualizações</h2>
+<p class="small">
+Esta política pode ser atualizada a qualquer momento.
+</p>
+
+</div>
+`;
+%>
+<%- include("_layout", { title, description, body }) %>
