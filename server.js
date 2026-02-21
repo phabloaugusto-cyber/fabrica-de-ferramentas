@@ -261,3 +261,6 @@ app.get('/privacidade', (req, res) => {
 app.get('/termos', (req, res) => {
   res.render('termos', { title: 'Termos de Uso' });
 });
+app.get('/contato', (req, res) => {
+  res.render('contato', { title: 'Contato' });
+});
