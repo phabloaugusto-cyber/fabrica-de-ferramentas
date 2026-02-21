@@ -1,119 +1,80 @@
 <%
-const title = "Início";
-const description = "Ferramentas online gratuitas para cálculos financeiros, pecuários e geração de documentos.";
+const title = "Ferramentas";
+const description = "Ferramentas online para cálculos financeiros, pecuários e geração de documentos em PDF.";
 
 const body = `
+<h1>Ferramentas</h1>
 
-<section class="card" style="padding:28px">
-  <h1>Portal Inteligência Rural</h1>
-
-  <p class="small">
-    Plataforma profissional com ferramentas gratuitas para cálculos financeiros, pecuários e geração de documentos.
-    Desenvolvido para produtores rurais, contadores, advogados e empresários que precisam de resultados rápidos e confiáveis.
-  </p>
-
-  <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
-    <a href="/pecuaria-plus" style="padding:10px 14px; border-radius:10px; border:1px solid rgba(110,168,254,.4); background:rgba(110,168,254,.15); font-weight:600;">
-      Calculadora Pecuária Avançada
-    </a>
-
-    <a href="/financiamento" style="padding:10px 14px; border-radius:10px; border:1px solid rgba(126,231,135,.4); background:rgba(126,231,135,.15); font-weight:600;">
-      Simulador de Financiamento
-    </a>
-  </div>
-</section>
-
+<p>
+  A <strong>${SITE_NAME}</strong> reúne ferramentas online para cálculos financeiros, pecuários e geração de documentos.
+  Use gratuitamente para simular juros, financiamento, salário líquido, lucro na pecuária e gerar contrato/recibo em PDF.
+</p>
 
 <div class="grid">
-
   <div class="card">
-    <h2>Financeiro</h2>
-
+    <h2>Para quem é este site</h2>
     <p class="small">
-      Ferramentas para simulação de juros, financiamentos e cálculo de salário líquido.
+      Produtores rurais, contadores, advogados, empresários e qualquer pessoa que precise de cálculos rápidos e confiáveis.
+      Os resultados são estimativas e devem ser conferidos antes de uso oficial.
     </p>
-
-    <ul class="small">
-      <li><a href="/juros">Calculadora de Juros</a></li>
-      <li><a href="/financiamento">Simulador de Financiamento</a></li>
-      <li><a href="/salario">Calculadora de Salário Líquido</a></li>
-    </ul>
-
   </div>
 
+  <div class="card">
+    <h2>Atalhos rápidos</h2>
+    <p class="small">
+      <a href="/pecuaria-plus">Pecuária+</a> •
+      <a href="/financiamento">Financiamento</a> •
+      <a href="/juros">Juros</a> •
+      <a href="/salario">Salário</a> •
+      <a href="/contrato">Contrato</a> •
+      <a href="/recibo">Recibo</a>
+    </p>
+  </div>
+</div>
+
+<hr />
+
+<div class="grid">
+  <div class="card">
+    <h2>Calculadora de Juros</h2>
+    <p class="small">Multa + juros mensais (composto). Simulação rápida.</p>
+    <p><a href="/juros">Abrir →</a></p>
+  </div>
 
   <div class="card">
     <h2>Pecuária</h2>
-
-    <p class="small">
-      Análise completa de custos, lucro e viabilidade em operações pecuárias.
-    </p>
-
-    <ul class="small">
-      <li><a href="/pecuaria">Calculadora Básica</a></li>
-      <li><a href="/pecuaria-plus">Calculadora Avançada</a></li>
-    </ul>
-
+    <p class="small">Lucro por cabeça e total. Compra x venda em arrobas.</p>
+    <p><a href="/pecuaria">Abrir →</a></p>
   </div>
 
+  <div class="card">
+    <h2>Pecuária+</h2>
+    <p class="small">Simulação avançada com dias, custo diário e ponto de equilíbrio.</p>
+    <p><a href="/pecuaria-plus">Abrir →</a></p>
+  </div>
+
+  <div class="card">
+    <h2>Financiamento</h2>
+    <p class="small">Parcela fixa (Price) com juros mensais.</p>
+    <p><a href="/financiamento">Abrir →</a></p>
+  </div>
+
+  <div class="card">
+    <h2>Salário Líquido</h2>
+    <p class="small">Estimativa com INSS/IRRF (aproximação).</p>
+    <p><a href="/salario">Abrir →</a></p>
+  </div>
 
   <div class="card">
     <h2>Documentos</h2>
-
-    <p class="small">
-      Gere documentos profissionais automaticamente em segundos.
+    <p class="small">Gere contrato e recibo preenchendo um formulário.</p>
+    <p>
+      <a href="/contrato">Contrato</a> •
+      <a href="/recibo">Recibo</a>
     </p>
-
-    <ul class="small">
-      <li><a href="/contrato">Gerador de Contrato</a></li>
-      <li><a href="/recibo">Gerador de Recibo</a></li>
-    </ul>
-
   </div>
-
-
-  <div class="card">
-    <h2>Sobre o Portal</h2>
-
-    <p class="small">
-      O Portal Inteligência Rural oferece ferramentas confiáveis e gratuitas para auxiliar na tomada de decisão financeira e operacional.
-    </p>
-
-    <p class="small">
-      <a href="/sobre">Saiba mais sobre o projeto</a>
-    </p>
-
-  </div>
-
 </div>
-
-
-<div class="card">
-
-  <h2>Objetivo</h2>
-
-  <p class="small">
-    Este portal foi criado para fornecer ferramentas práticas e acessíveis, eliminando a necessidade de planilhas complexas ou softwares pagos.
-  </p>
-
-  <p class="small">
-    Todas as ferramentas são executadas diretamente no navegador e não exigem instalação.
-  </p>
-
-</div>
-
-
-<div class="card">
-
-  <h2>Importante</h2>
-
-  <p class="small">
-    Os resultados fornecidos são estimativas e devem ser utilizados como apoio à decisão, não substituindo análise técnica profissional.
-  </p>
-
-</div>
-
 `;
 %>
 
-<%- include("_layout", { title, description, body, active: "home" }) %>
+<%- include("_layout", { title, description, body }) %>
