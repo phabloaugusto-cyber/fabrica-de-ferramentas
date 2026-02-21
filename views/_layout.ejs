@@ -4,54 +4,66 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Google Search Console (mantenha este token) -->
+  <% const pageTitle = (typeof title !== 'undefined' && title) ? `${title} | ${SITE_NAME}` : SITE_NAME; %>
+  <% const pageDesc  = (typeof description !== 'undefined' && description) ? description : "Ferramentas online para cálculos financeiros, pecuária e geração de documentos (PDF)."; %>
+
+  <title><%= pageTitle %></title>
+  <meta name="description" content="<%= pageDesc %>" />
+
+  <!-- Google Search Console (deixe exatamente o seu token atual) -->
   <meta name="google-site-verification" content="g9mqeLvGGD1YpVxnAAN49SNyyHELHrqtVDZZh6ppwkU" />
 
-  <title><%= typeof title !== 'undefined' ? title : SITE_NAME %></title>
   <link rel="stylesheet" href="/style.css" />
+
+  <!-- (Opcional) Open Graph básico -->
+  <meta property="og:title" content="<%= pageTitle %>" />
+  <meta property="og:description" content="<%= pageDesc %>" />
+  <meta property="og:type" content="website" />
 </head>
 
 <body>
   <header class="no-print">
-    <div>
-      <strong><%= SITE_NAME %></strong>
-      <span class="small">• ferramentas automáticas</span>
-    </div>
+    <div class="topbar">
+      <div class="brand">
+        <strong><%= SITE_NAME %></strong>
+        <span class="small">• ferramentas automáticas</span>
+      </div>
 
-    <nav class="nav" style="margin-top:10px">
-      <a href="/">Início</a>
-      <a href="/juros">Juros</a>
-      <a href="/pecuaria">Pecuária</a>
-      <a href="/contrato">Contrato</a>
-      <a href="/recibo">Recibo</a>
-      <a href="/financiamento">Financiamento</a>
-      <a href="/salario">Salário</a>
-      <a href="/pecuaria-plus">Pecuária+</a>
-      <a href="/sobre">Sobre</a>
-      <a href="/contato">Contato</a>
-    </nav>
+      <nav class="nav">
+        <a href="/">Início</a>
+        <a href="/juros">Juros</a>
+        <a href="/pecuaria">Pecuária</a>
+        <a href="/contrato">Contrato</a>
+        <a href="/recibo">Recibo</a>
+        <a href="/financiamento">Financiamento</a>
+        <a href="/salario">Salário</a>
+        <a href="/pecuaria-plus">Pecuária+</a>
+        <a href="/sobre">Sobre</a>
+        <a href="/contato">Contato</a>
+      </nav>
+    </div>
     <hr />
   </header>
 
-  <main>
+  <main class="container">
     <%- body %>
   </main>
 
-  <footer class="no-print" style="margin-top:24px">
+  <footer class="footer no-print">
     <hr />
-    <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;">
-      <div>
+    <div class="footer-row">
+      <div class="footer-links">
         <a href="/privacidade">Política de Privacidade</a>
-        <span> | </span>
+        <span class="sep">|</span>
         <a href="/termos">Termos de Uso</a>
-        <span> | </span>
+        <span class="sep">|</span>
         <a href="/contato">Contato</a>
       </div>
 
-      <div class="small">© <%= new Date().getFullYear() %> <%= SITE_NAME %></div>
+      <div class="footer-copy">
+        © <%= new Date().getFullYear() %> <%= SITE_NAME %>
+      </div>
     </div>
   </footer>
-
-  <!-- Depois que o AdSense aprovar, você cola aqui o script que ele fornecer (Auto Ads) -->
 </body>
 </html>
