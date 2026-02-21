@@ -250,20 +250,26 @@ app.post("/pecuaria-plus", (req, res) => {
 });
 
 
+// Healthcheck
 app.get("/health", (req, res) => res.json({ ok: true }));
 
-const port = Number(process.env.PORT || 3000);
-app.listen(port, () => console.log(`[OK] ${SITE_NAME} rodando na porta ${port}`));
-app.get('/privacidade', (req, res) => {
-  res.render('privacidade', { title: 'Política de Privacidade' });
+// Páginas institucionais
+app.get("/privacidade", (req, res) => {
+  res.render("privacidade", { SITE_NAME, title: "Política de Privacidade" });
 });
 
-app.get('/termos', (req, res) => {
-  res.render('termos', { title: 'Termos de Uso' });
+app.get("/termos", (req, res) => {
+  res.render("termos", { SITE_NAME, title: "Termos de Uso" });
 });
-app.get('/contato', (req, res) => {
-  res.render('contato', { title: 'Contato' });
+
+app.get("/contato", (req, res) => {
+  res.render("contato", { SITE_NAME, title: "Contato" });
 });
+
 app.get("/sobre", (req, res) => {
-  res.render("sobre", { title: "Sobre" });
+  res.render("sobre", { SITE_NAME, title: "Sobre" });
 });
+
+// Start
+const port = Number(process.env.PORT || 3000);
+app.listen(port, () => console.log(`[OK] ${SITE_NAME} rodando na porta ${port}`));
