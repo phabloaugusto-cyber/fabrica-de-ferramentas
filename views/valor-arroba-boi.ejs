@@ -1,0 +1,49 @@
+<%
+const title = "Valor da Arroba do Boi";
+const description = "Calcule valor por arroba a partir de peso (kg) e preço total ou preço/kg.";
+
+const body = `
+<h1>Valor da Arroba do Boi</h1>
+
+<div class="card">
+  <p class="small">
+    Conversão padrão: 1 arroba = 15 kg (ajuste se quiser).
+  </p>
+</div>
+
+<div class="card">
+  <form method="post" action="/valor-arroba-boi">
+    <label>Peso do animal (kg)</label>
+    <input name="peso_kg" inputmode="decimal" placeholder="Ex: 450" required />
+
+    <label>Preço total do animal (R$) (opcional)</label>
+    <input name="preco_total" inputmode="decimal" placeholder="Ex: 9000" />
+
+    <label>Preço por kg (R$/kg) (opcional)</label>
+    <input name="preco_kg" inputmode="decimal" placeholder="Ex: 20,00" />
+
+    <label>Kg por arroba</label>
+    <input name="arroba_kg" inputmode="decimal" value="15" />
+
+    <button type="submit">Calcular</button>
+  </form>
+</div>
+
+<% if (result) { %>
+  <div class="card">
+    <h2>Resultado</h2>
+    <p class="small"><strong>Arrobas:</strong> <%= result.arrobasFmt %></p>
+    <p class="small"><strong>Preço por arroba:</strong> <%= result.precoArrobaFmt %></p>
+    <p class="small"><strong>Preço total estimado:</strong> <%= result.precoTotalFmt %></p>
+  </div>
+<% } %>
+
+<div class="card">
+  <h2>Dica</h2>
+  <p class="small">
+    Informe <strong>Preço total</strong> OU <strong>Preço/kg</strong>. Se informar os dois, o sistema prioriza o preço total.
+  </p>
+</div>
+`;
+%>
+<%- include("_layout", { title, description, body }) %>
