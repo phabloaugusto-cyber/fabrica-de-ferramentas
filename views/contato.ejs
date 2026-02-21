@@ -1,7 +1,31 @@
+<%
+const title = "Contato";
+const description = "Entre em contato com a Fábrica de Ferramentas.";
+const body = `
 <h1>Contato</h1>
 
-<p>Para dúvidas, sugestões ou suporte:</p>
+<div class="card">
+  <p>
+    Se você tiver dúvidas, sugestões ou precisar de suporte, entre em contato:
+  </p>
 
-<p>Email: phabloaugusto@gmail.com</p>
+  <p>
+    <strong>Email:</strong><br>
+    <a href="mailto:phablo.augusto@gmail.com">phablo.augusto@gmail.com</a>
+  </p>
 
-<p>Este site é parte do projeto Portal Inteligência Rural.</p>
+  <p class="small">
+    Respondemos normalmente em até 24 horas.
+  </p>
+</div>
+
+<div class="card">
+  <h2>Sobre o site</h2>
+  <p class="small">
+    A Fábrica de Ferramentas é um portal com ferramentas online gratuitas para cálculos financeiros,
+    pecuários e geração de documentos.
+  </p>
+</div>
+`;
+%>
+<%- include("_layout", { title, description, body }) %>
